@@ -1,0 +1,63 @@
+/*
+ Name: Justin Banusing
+ Date: October 30, 2019
+ Section: CSE 154 AE
+
+This is the CSS file for my CP3. It styles the posters and the page.
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+  background-color: #462970;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  width: 320px;
+}
+
+#main-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  margin-top: 1%;
+  margin-left: 3%;
+  margin-right: 3%;
+} 
+
+.card {
+  margin: 1%;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.title-text::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f02d";
+  margin-right: 5%;
+}
+
+.viewer-text::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f007";
+  margin-right: 5%;
+}
+
+.btn, .btn-primary{
+  background-color: #6441a5;
+  border-color: black;
+}
+
+.btn:hover{
+  background-color: #a67cff;
+}

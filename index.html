@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+  ***
+  Name: Justin Banusing
+  Date: October 30, 2019
+  Section: CSE 154 AE
+
+  This is the the about me page of my CP3. It shows you the latest movies of each genre.
+  ***
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+      <!--- Link to Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+      <!--- Link to Bootstrap JS -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"> </script>
+      <!--Link to Font Awesome -->
+      <script src="https://kit.fontawesome.com/6de3e3b757.js" crossorigin="anonymous"></script>
+      <!--- Link to Main JS File -->
+      <script src = "index.js"></script>
+      <!--- Link to User-Made CSS -->
+      <link rel="stylesheet" href= "styles.css">
+      <title> About Me - Justin Banusing </title>
+  </head>
+  <body>
+    <!-- Navigation Area -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#" id="title">Find Your Film!</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Select Genre:
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="genres">
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" id="current-genre">
+            No Genre Selected 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled hidden" href="#" tabindex="-1" id="error-message"> 
+          </a>
+        </li>        
+      </ul>
+      <form class="form-inline my-2 my-lg-0" id = "form" onSubmit="return false;">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" id = "search-bar">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"> Search</button>
+      </form>
+    </nav>
+    <!-- Main Area -->
+    <main>
+      <p id = "text-space"> Find Your Film! shows the top 20 movies of a certain genre, according to MovieDB. Click the drop down menu on
+        the top to select a genre! Click on a card to learn more about it! 
+      </p>
+      <div id = "poster-container"> </div>
+    </main>
+  </body>
+</html>
