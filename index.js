@@ -6,12 +6,6 @@ const ANIM_INTERVAL = 1000;
 
 window.addEventListener("load", init);
 
-$(document).ready(function() {
-    setTimeout(function(){
-        $('body').addClass('loaded');
-    }, 1000);
-});
-
 function init() {
     grabGames();
 }
