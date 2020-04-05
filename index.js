@@ -8,22 +8,8 @@ window.addEventListener("load", init);
 
 function init() {
     grabGames();
+    grabStreams();
 }
-
-/* Grabbing Template 
-function grab() {
-    fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Client-ID': client_id,
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-          console.log(responseJson);
-      })
-  } */ 
 
 /* Grab Top Games */
 function grabGames() {
@@ -40,6 +26,21 @@ function grabGames() {
         })
 } 
 
+/* Grab Top Streams */
+function grabStreams() {
+  fetch(url + 'streams', {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Client-ID': client_id,
+      }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+          createLanguageNav(responseJson.data);
+      })
+  } 
+
 /* Puts Top Games Into the Navbar */
 function createNav(games) {
     for (let gameCount = 0; gameCount < games.length; gameCount++) {
@@ -48,7 +49,6 @@ function createNav(games) {
         let content = document.createElement("a");
         content.classList.add("nav-link");
         content.innerText = games[gameCount].name;
-        content.id = games[gameCount].id;
         element.appendChild(content);
         content.addEventListener("click", () => selectGame(games[gameCount]));
         document.getElementById("games").appendChild(element);
@@ -56,15 +56,42 @@ function createNav(games) {
     selectGame(games[0]);
 }
 
+/* Puts Languages in the Navbar */
+function createLanguageNav(streams) {
+  var languages = [];
+  for (let languageCount = 0; languageCount < streams.length; languageCount++) {
+    let newLanguage = streams[languageCount].language;
+    if(languages.indexOf(newLanguage) === -1) {
+      languages.push(newLanguage);
+      let element = document.createElement("li");
+      element.classList.add("nav-item");
+      let content = document.createElement("a");
+      content.classList.add("nav-link");
+      content.innerText = newLanguage;
+      element.appendChild(content);
+      content.addEventListener("click", () => selectLanguage(newLanguage));
+      document.getElementById("languages").appendChild(element);
+    }
+  }
+}
+
 /* Behavior for Game Selection */
 function selectGame(game) {
     document.getElementById("current-game").innerText = game.name;
-    grabTopStreamsofGame(game.id);
+    document.getElementById("current-game").name = game.id;
+    grabTopStreamsofGame(game.id, document.getElementById("current-language").innerText);
+}
+
+/* Behavior for Game Selection */
+function selectLanguage(language) {
+  document.getElementById("current-language").innerText = language;
+  grabTopStreamsofGame(document.getElementById("current-game").name, language);
 }
   
 /* Grab Top Streams of a Specific Game */
-function grabTopStreamsofGame(game_id) {
-fetch(url + 'streams?game_id=' + game_id, {
+function grabTopStreamsofGame(game_id, language) {
+console.log(url + 'streams?game_id=' + game_id + "&language=" + language);
+fetch(url + 'streams?game_id=' + game_id + "&language=" + language, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
@@ -74,6 +101,7 @@ fetch(url + 'streams?game_id=' + game_id, {
     .then((response) => response.json())
     .then((responseJson) => {
         handleStreamList(responseJson.data);
+        //console.log(responseJson.data);
     })
 } 
 
@@ -81,7 +109,6 @@ fetch(url + 'streams?game_id=' + game_id, {
 function handleStreamList(streams) {
     document.getElementById("main-container").innerHTML = "";
     for (let streamCount = 0; streamCount < streams.length; streamCount++) {
-        console.log(streams[streamCount]);
         let card = document.createElement("div");
         card.classList.add("card");
         /* Thumbnail */
